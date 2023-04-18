@@ -3,6 +3,7 @@ import "./vendor";
 import { ImageSlider } from "./utils/image-slider";
 import { iosVhFix } from "./utils/ios-vh-fix";
 import { modals, initModals } from "./modals/init-modals";
+import MainPresenter from "./presenter/main-presenter.js";
 
 // Ваши импорты...
 
@@ -32,4 +33,10 @@ window.addEventListener("DOMContentLoaded", () => {
   // ------------
 
   // Ваш код...
+
+  const mainElement = document.querySelector('main');
+
+  const mainPresenter = new MainPresenter(mainElement);
+
+  mainPresenter.init();
 });
