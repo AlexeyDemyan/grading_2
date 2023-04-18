@@ -1,6 +1,6 @@
-# Проект «{{projectTitle}}»
+# Проект «Bouquet»
 
-* Студент: [{{userName}}]({{userProfile}}).
+* Студент: [Алексей Демьянов](https://up.htmlacademy.ru/ecmascript/19/user/1995679).
 
 ---
 
