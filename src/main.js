@@ -3,7 +3,11 @@ import "./vendor";
 import { ImageSlider } from "./utils/image-slider";
 import { iosVhFix } from "./utils/ios-vh-fix";
 import { modals, initModals } from "./modals/init-modals";
+import HeaderPresenter from "./presenter/header-presenter";
 import MainPresenter from "./presenter/main-presenter.js";
+import ItemsModel from "./model/items-model";
+import ItemsApiService from "./items-api-service";
+import { ApiCredentials } from './const.js';
 
 // Ваши импорты...
 
@@ -34,9 +38,24 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // Ваш код...
 
-  const mainElement = document.querySelector('main');
+  const mainElement = document.querySelector("main");
 
+  const headerPresenter = new HeaderPresenter(mainElement);
   const mainPresenter = new MainPresenter(mainElement);
 
+  const itemsModel = new ItemsModel({
+    itemsApiService: new ItemsApiService(
+      ApiCredentials.END_POINT,
+      ApiCredentials.AUTHORIZATION
+    ),
+  });
+
+  headerPresenter.init();
   mainPresenter.init();
+
+  itemsModel.init()
+    .finally((response) => {
+      console.log('render');
+      console.log(response);
+    })
 });
