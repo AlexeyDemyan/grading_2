@@ -11,9 +11,11 @@ import CatalogueContainerView from "../view/catalogue-container-view.js";
 import CatalogueHeaderView from "../view/catalogue-header-view.js";
 import CatalogueListView from "../view/catalogue-list-view.js";
 import CatalogueButtonWrapView from "../view/catalogue-btn-wrap-view.js";
+import ItemListPresenter from "./item-list-presenter.js";
 
 export default class MainPresenter {
   #mainMenuContainer = null;
+  #itemsModel = null;
   #errorMessageComponent = new ErrorView();
   #heroComponent = new HeroView();
   #advantagesComponent = new AdvantagesView();
@@ -27,11 +29,16 @@ export default class MainPresenter {
   #catalogueListView = new CatalogueListView();
   #catalogueButtonWrapView = new CatalogueButtonWrapView();
 
-  constructor(mainMenuContainer) {
+  constructor(mainMenuContainer, itemsModel) {
     this.#mainMenuContainer = mainMenuContainer;
+    this.#itemsModel = itemsModel;
+
+    this.#itemsModel.addObserver(this.#handleModelEvent);
   }
 
   #renderBoard() {
+    const itemListPresenter = new ItemListPresenter(this.#catalogueListView.element, this.#itemsModel);
+
     render(this.#heroComponent, this.#mainMenuContainer);
     render(this.#missionComponent, this.#mainMenuContainer);
     render(this.#advantagesComponent, this.#mainMenuContainer);
@@ -44,6 +51,12 @@ export default class MainPresenter {
     render(this.#catalogueListView, this.#catalogueContainerView.element);
     render(this.#catalogueButtonWrapView, this.#catalogueContainerView.element);
     render(this.#popupDeferredComponent, this.#mainMenuContainer);
+
+    itemListPresenter.init();
+  }
+
+  #handleModelEvent = () => {
+    this.init();
   }
 
   init() {

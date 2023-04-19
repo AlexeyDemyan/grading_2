@@ -15,7 +15,6 @@ export default class ItemPresenter {
     this.#item = item;
 
     this.#itemComponent = new ItemView(this.#item);
-
     render(this.#itemComponent, this.#itemListContainer);
   }
 }

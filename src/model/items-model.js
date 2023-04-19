@@ -16,15 +16,13 @@ export default class ItemsModel extends Observable {
 
   async init() {
     try {
-      const items = await this.#itemsApiService.items;
-      console.log(items);
+      this.#items = await this.#itemsApiService.items;
     }
     catch(err) {
       console.log(err);
       this.#items = [];
     }
-
-    this._notify(UpdateType.INIT);
+    this._notify();
   }
 
 }

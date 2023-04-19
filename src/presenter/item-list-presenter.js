@@ -19,7 +19,7 @@ export default class ItemListPresenter {
   }
 
   #renderItem(item) {
-    const itemPresenter = new ItemPresenter(item);
+    const itemPresenter = new ItemPresenter(this.#itemListContainer);
     itemPresenter.init(item);
     this.#itemPresenters.push(itemPresenter);
   }
@@ -29,9 +29,9 @@ export default class ItemListPresenter {
       render(this.#noItemsMessageComponent, this.#itemListContainer);
     } else {
       render(this.#itemsListComponent, this.#itemListContainer);
-      for (const item of this.#items) {
+      this.#items.forEach(item => {
         this.#renderItem(item);
-      }
+      })
     }
   }
 

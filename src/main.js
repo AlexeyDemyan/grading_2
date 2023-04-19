@@ -41,9 +41,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const mainElement = document.querySelector("main");
 
-  const headerPresenter = new HeaderPresenter(mainElement);
-  const mainPresenter = new MainPresenter(mainElement);
-
   const itemsModel = new ItemsModel({
     itemsApiService: new ItemsApiService(
       ApiCredentials.END_POINT,
@@ -51,10 +48,13 @@ window.addEventListener("DOMContentLoaded", () => {
     ),
   });
 
+  const headerPresenter = new HeaderPresenter(mainElement);
+  const mainPresenter = new MainPresenter(mainElement, itemsModel);
+
   const itemListPresenter = new ItemListPresenter(mainElement, itemsModel)
 
   headerPresenter.init();
-  mainPresenter.init();
+  // mainPresenter.init();
   itemListPresenter.init();
 
   itemsModel.init();
