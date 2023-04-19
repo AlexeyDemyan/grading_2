@@ -8,6 +8,7 @@ import MainPresenter from "./presenter/main-presenter.js";
 import ItemsModel from "./model/items-model";
 import ItemsApiService from "./items-api-service";
 import { ApiCredentials } from './const.js';
+import ItemListPresenter from "./presenter/item-list-presenter";
 
 // Ваши импорты...
 
@@ -50,12 +51,12 @@ window.addEventListener("DOMContentLoaded", () => {
     ),
   });
 
+  const itemListPresenter = new ItemListPresenter(mainElement, itemsModel)
+
   headerPresenter.init();
   mainPresenter.init();
+  itemListPresenter.init();
 
-  itemsModel.init()
-    .finally((response) => {
-      console.log('render');
-      console.log(response);
-    })
+  itemsModel.init();
+
 });

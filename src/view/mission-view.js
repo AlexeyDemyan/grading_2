@@ -20,6 +20,6 @@ const createMissionTemplate = () => `<section class="mission">
 
 export default class MissionView extends AbstractView {
   get template() {
-    return createMissionTemplate;
+    return createMissionTemplate();
   }
 }

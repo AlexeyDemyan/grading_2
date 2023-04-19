@@ -12,6 +12,6 @@ const createErrorTemplate = () => `<section class="error-message">
 
 export default class ErrorView extends AbstractView {
   get template() {
-    return createErrorTemplate;
+    return createErrorTemplate();
   }
 }

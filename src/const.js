@@ -3,4 +3,11 @@ const ApiCredentials = {
   AUTHORIZATION: 'Basic hsie9309fjsidf322',
 }
 
-export { ApiCredentials }
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+  INIT: 'INIT',
+};
+
+export { ApiCredentials, UpdateType }

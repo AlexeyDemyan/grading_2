@@ -1,4 +1,5 @@
 import Observable from '../framework/observable.js';
+import { UpdateType } from '../const.js';
 
 export default class ItemsModel extends Observable {
   #itemsApiService = null;
@@ -6,7 +7,7 @@ export default class ItemsModel extends Observable {
 
   constructor({itemsApiService}) {
     super();
-    this.itemsApiService = itemsApiService;
+    this.#itemsApiService = itemsApiService;
   }
 
   get items() {
@@ -23,9 +24,7 @@ export default class ItemsModel extends Observable {
       this.#items = [];
     }
 
-    console.log(this.#items);
-
-    // this._notify(UpdateType.INIT);
+    this._notify(UpdateType.INIT);
   }
 
 }

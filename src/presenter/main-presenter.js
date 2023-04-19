@@ -7,7 +7,10 @@ import FilterReasonView from "../view/filter-reason-view.js";
 import FilterColorView from "../view/filter-color-view.js";
 import CatalogueView from "../view/catalogue-view.js";
 import PopupDeferredView from "../view/popup-deferred-view.js";
-
+import CatalogueContainerView from "../view/catalogue-container-view.js";
+import CatalogueHeaderView from "../view/catalogue-header-view.js";
+import CatalogueListView from "../view/catalogue-list-view.js";
+import CatalogueButtonWrapView from "../view/catalogue-btn-wrap-view.js";
 
 export default class MainPresenter {
   #mainMenuContainer = null;
@@ -19,6 +22,10 @@ export default class MainPresenter {
   #filterColorComponent = new FilterColorView();
   #popupDeferredComponent = new PopupDeferredView();
   #catalogueViewComponent = new CatalogueView();
+  #catalogueContainerView = new CatalogueContainerView();
+  #catalogueHeaderView = new CatalogueHeaderView();
+  #catalogueListView = new CatalogueListView();
+  #catalogueButtonWrapView = new CatalogueButtonWrapView();
 
   constructor(mainMenuContainer) {
     this.#mainMenuContainer = mainMenuContainer;
@@ -31,7 +38,11 @@ export default class MainPresenter {
     render(this.#filterReasonComponent, this.#mainMenuContainer);
     render(this.#errorMessageComponent, this.#mainMenuContainer);
     render(this.#filterColorComponent, this.#mainMenuContainer);
-    render(this.#catalogueViewComponent, this.#mainMenuContainer)
+    render(this.#catalogueViewComponent, this.#mainMenuContainer);
+    render(this.#catalogueContainerView, this.#catalogueViewComponent.element);
+    render(this.#catalogueHeaderView, this.#catalogueContainerView.element);
+    render(this.#catalogueListView, this.#catalogueContainerView.element);
+    render(this.#catalogueButtonWrapView, this.#catalogueContainerView.element);
     render(this.#popupDeferredComponent, this.#mainMenuContainer);
   }
 

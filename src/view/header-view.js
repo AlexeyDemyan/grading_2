@@ -39,6 +39,6 @@ const createHeaderTemplate = () => `<header class="header">
 
 export default class HeaderView extends AbstractView {
   get template() {
-    return createHeaderTemplate;
+    return createHeaderTemplate();
   }
 }

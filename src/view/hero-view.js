@@ -20,6 +20,6 @@ const createHeroTemplate = () => `<section class="hero">
 
 export default class HeroView extends AbstractView {
   get template() {
-    return createHeroTemplate;
+    return createHeroTemplate();
   }
 }

@@ -36,6 +36,6 @@ const createAdvantagesTemplate = () => `<section class="advantages">
 
 export default class AdvantagesView extends AbstractView {
   get template() {
-    return createAdvantagesTemplate;
+    return createAdvantagesTemplate();
   }
 }

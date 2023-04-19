@@ -161,6 +161,6 @@ const createPopupDeferredTemplate = () => `<section class="popup-deferred" style
 
 export default class PopupDeferredView extends AbstractView {
   get template() {
-    return createPopupDeferredTemplate;
+    return createPopupDeferredTemplate();
   }
 }
