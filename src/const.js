@@ -34,4 +34,6 @@ const SortType = {
   PRICE_UP: 'price-up',
 };
 
-export { ApiCredentials, UpdateType }
+const ITEMS_SHOW_COUNT = 6;
+
+export { ApiCredentials, UpdateType, FilterReason, FilterColor, SortType, ITEMS_SHOW_COUNT }

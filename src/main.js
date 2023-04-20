@@ -9,6 +9,7 @@ import ItemsModel from "./model/items-model";
 import ItemsApiService from "./items-api-service";
 import { ApiCredentials } from './const.js';
 import ItemListPresenter from "./presenter/item-list-presenter";
+import FiltersModel from "./model/filters-model.js";
 
 // Ваши импорты...
 
@@ -48,13 +49,14 @@ window.addEventListener("DOMContentLoaded", () => {
     ),
   });
 
-  const headerPresenter = new HeaderPresenter(mainElement);
-  const mainPresenter = new MainPresenter(mainElement, itemsModel);
+  const filtersModel = new FiltersModel();
 
-  const itemListPresenter = new ItemListPresenter(mainElement, itemsModel)
+  const headerPresenter = new HeaderPresenter(mainElement);
+  const mainPresenter = new MainPresenter(mainElement, itemsModel, filtersModel);
+  const itemListPresenter = new ItemListPresenter(mainElement, itemsModel, filtersModel)
 
   headerPresenter.init();
-  // mainPresenter.init();
+  mainPresenter.init();
   itemListPresenter.init();
 
   itemsModel.init();

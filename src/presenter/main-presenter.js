@@ -16,6 +16,7 @@ import ItemListPresenter from "./item-list-presenter.js";
 export default class MainPresenter {
   #mainMenuContainer = null;
   #itemsModel = null;
+  #filtersModel = null;
   #errorMessageComponent = new ErrorView();
   #heroComponent = new HeroView();
   #advantagesComponent = new AdvantagesView();
@@ -29,15 +30,17 @@ export default class MainPresenter {
   #catalogueListView = new CatalogueListView();
   #catalogueButtonWrapView = new CatalogueButtonWrapView();
 
-  constructor(mainMenuContainer, itemsModel) {
+  constructor(mainMenuContainer, itemsModel, filtersModel) {
     this.#mainMenuContainer = mainMenuContainer;
     this.#itemsModel = itemsModel;
+    this.#filtersModel = filtersModel;
 
     this.#itemsModel.addObserver(this.#handleModelEvent);
+    this.#filtersModel.addObserver(this.#handleModelEvent);
   }
 
   #renderBoard() {
-    const itemListPresenter = new ItemListPresenter(this.#catalogueListView.element, this.#itemsModel);
+    const itemListPresenter = new ItemListPresenter(this.#catalogueListView.element, this.#itemsModel, this.#filtersModel);
 
     render(this.#heroComponent, this.#mainMenuContainer);
     render(this.#missionComponent, this.#mainMenuContainer);
