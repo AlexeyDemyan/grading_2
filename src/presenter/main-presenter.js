@@ -28,7 +28,7 @@ export default class MainPresenter {
   #catalogueContainerView = new CatalogueContainerView();
   #catalogueHeaderView = new CatalogueHeaderView();
   #catalogueListView = new CatalogueListView();
-  #catalogueButtonWrapView = new CatalogueButtonWrapView();
+  #catalogueButtonWrapView = new CatalogueButtonWrapView(() => {console.log('ostya')});
 
   constructor(mainMenuContainer, itemsModel, filtersModel) {
     this.#mainMenuContainer = mainMenuContainer;

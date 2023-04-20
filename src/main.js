@@ -49,16 +49,20 @@ window.addEventListener("DOMContentLoaded", () => {
     ),
   });
 
+  const tempData = {
+    count: 5,
+    amount: 6
+  }
+
   const filtersModel = new FiltersModel();
 
   const headerPresenter = new HeaderPresenter(mainElement);
   const mainPresenter = new MainPresenter(mainElement, itemsModel, filtersModel);
   const itemListPresenter = new ItemListPresenter(mainElement, itemsModel, filtersModel)
 
-  headerPresenter.init();
+  headerPresenter.init(tempData);
   mainPresenter.init();
   itemListPresenter.init();
-
   itemsModel.init();
 
 });

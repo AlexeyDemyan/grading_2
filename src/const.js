@@ -34,6 +34,11 @@ const SortType = {
   PRICE_UP: 'price-up',
 };
 
+const ScrollUp = {
+  TOP: 0,
+  BEHAVIOUR: 'smooth'
+}
+
 const ITEMS_SHOW_COUNT = 6;
 
-export { ApiCredentials, UpdateType, FilterReason, FilterColor, SortType, ITEMS_SHOW_COUNT }
+export { ApiCredentials, UpdateType, FilterReason, FilterColor, SortType, ITEMS_SHOW_COUNT, ScrollUp }

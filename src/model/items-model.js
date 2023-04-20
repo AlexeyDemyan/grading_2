@@ -4,6 +4,7 @@ import { UpdateType } from '../const.js';
 export default class ItemsModel extends Observable {
   #itemsApiService = null;
   #items = [];
+  #favorites = [];
 
   constructor({itemsApiService}) {
     super();
@@ -12,6 +13,10 @@ export default class ItemsModel extends Observable {
 
   get items() {
     return this.#items;
+  }
+
+  get favorites() {
+    return this.#favorites;
   }
 
   async init() {
