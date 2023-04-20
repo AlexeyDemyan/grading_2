@@ -10,7 +10,7 @@ import PopupDeferredView from "../view/popup-deferred-view.js";
 import CatalogueContainerView from "../view/catalogue-container-view.js";
 import CatalogueHeaderView from "../view/catalogue-header-view.js";
 import CatalogueListView from "../view/catalogue-list-view.js";
-import CatalogueButtonWrapView from "../view/catalogue-btn-wrap-view.js";
+
 import ItemListPresenter from "./item-list-presenter.js";
 
 export default class MainPresenter {
@@ -28,7 +28,6 @@ export default class MainPresenter {
   #catalogueContainerView = new CatalogueContainerView();
   #catalogueHeaderView = new CatalogueHeaderView();
   #catalogueListView = new CatalogueListView();
-  #catalogueButtonWrapView = new CatalogueButtonWrapView(() => {console.log('ostya')});
 
   constructor(mainMenuContainer, itemsModel, filtersModel) {
     this.#mainMenuContainer = mainMenuContainer;
@@ -52,7 +51,6 @@ export default class MainPresenter {
     render(this.#catalogueContainerView, this.#catalogueViewComponent.element);
     render(this.#catalogueHeaderView, this.#catalogueContainerView.element);
     render(this.#catalogueListView, this.#catalogueContainerView.element);
-    render(this.#catalogueButtonWrapView, this.#catalogueContainerView.element);
     render(this.#popupDeferredComponent, this.#mainMenuContainer);
 
     itemListPresenter.init();
