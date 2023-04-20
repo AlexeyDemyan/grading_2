@@ -12,11 +12,11 @@ const UpdateType = {
 
 const FilterReason = {
   ALL: 'for-all',
-  BIRTHDAY: 'for-birthday',
-  BRIDE: 'for-bride',
-  MOTHER: 'for-mother',
-  COLLEAGUE: 'for-colleague',
-  DARLING: 'for-darling',
+  BIRTHDAY: 'birthdayboy',
+  BRIDE: 'bridge',
+  MOTHER: 'motherday',
+  COLLEAGUE: 'colleagues',
+  DARLING: 'forlove',
 };
 
 const FilterColor = {

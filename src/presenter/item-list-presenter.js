@@ -32,8 +32,11 @@ export default class ItemListPresenter {
     this.#filterReason = this.#filtersModel.filterReason;
     this.#filterColor = this.#filtersModel.filterColor;
     const items = this.#itemsModel.items;
-    const filteredByReasonItems = filterByReason[this.#filterReason](items);
-    const filteredByColorItems = filterByColor[this.#filterColor](filteredByReasonItems);
+    console.log(items);
+    const filteredByReasonItems = filterByReason(items, this.#filtersModel.filterReason);
+    console.log(items);
+    const filteredByColorItems = filterByColor(filteredByReasonItems, this.#filtersModel.filterColor);
+    console.log(filteredByColorItems);
 
     return filteredByColorItems;
   }
@@ -54,6 +57,7 @@ export default class ItemListPresenter {
     } else {
       render(this.#itemsListComponent, this.#itemListContainer);
       this.#renderItems(this.items.slice(0, Math.min(6, this.#renderedItemCount)));
+      // this.#renderItems(this.items);
     }
   }
 
