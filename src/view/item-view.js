@@ -1,4 +1,12 @@
 import AbstractView from "../framework/view/abstract-view.js";
+import { MAX_SHOWN_DESCRIPTION, TYPE_HEADERS } from "../const.js";
+
+const formatDescription = (description) => {
+  if (description.length > MAX_SHOWN_DESCRIPTION) {
+    return `${description.slice(0, (MAX_SHOWN_DESCRIPTION - 1))}...`;
+  }
+  return description;
+};
 
 const createItemTemplate = (item) => {
   const {type, previewImage, title, price, description} = item;
@@ -6,7 +14,7 @@ const createItemTemplate = (item) => {
   return `<li class="catalogue__item">
   <div class="item-card">
     <button class="item-card__btn" type="button" data-open-modal="product-card" aria-label="посмотреть товар"></button>
-    <p class="item-card__label">${type}</p>
+    <p class="item-card__label">${TYPE_HEADERS[type]}</p>
     <div class="item-card__img-wrap">
       <button class="button-heart item-card__to-fav-btn" type="button" aria-label="добавить в избранное">
         <svg class="button-heart__icon" width="75" height="75" aria-hidden="true" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -24,7 +32,7 @@ const createItemTemplate = (item) => {
       <h3 class="title title--h4 item-card__title">${title}</h3>
       <div class="item-card__price-wrap"><b class="item-card__formatted-price">${price}</b><span class="item-card__currency">р</span></div>
     </div>
-    <p class="text text--size-20 item-card__desc">${description}</p>
+    <p class="text text--size-20 item-card__desc">${formatDescription(description)}</p>
   </div>
   </li>`
 };
