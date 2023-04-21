@@ -27,9 +27,9 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   // Пример кода для открытия попапа
-  document
-    .querySelector(".element-which-is-open-popup")
-    .addEventListener("click", () => modals.open("popup-data-attr"));
+  // document
+  //   .querySelector(".element-which-is-open-popup")
+  //   .addEventListener("click", () => modals.open("popup-data-attr"));
 
   // Код отработает, если разметка попапа уже отрисована в index.html
 

@@ -1,5 +1,6 @@
 import AbstractView from "../framework/view/abstract-view.js";
 import { MAX_SHOWN_DESCRIPTION, TYPE_HEADERS } from "../const.js";
+import { modals } from '../modals/init-modals.js'
 
 const formatDescription = (description) => {
   if (description.length > MAX_SHOWN_DESCRIPTION) {
@@ -60,8 +61,10 @@ export default class ItemView extends AbstractView {
 
   #itemClickHandler = () => {
     this.#handleItemClick();
-    document.querySelector('.modal').classList.add('product-card-active', 'is-active');
+    // document.querySelector('.modal').classList.add('product-card-active', 'is-active');
     document.querySelector('body').classList.add('scroll-lock');
+    modals.open("popup-data-attr");
+    console.log('need to populate item data into popup now')
   };
 
   #faveClickHandler = () => {
