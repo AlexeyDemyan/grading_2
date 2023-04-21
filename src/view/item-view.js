@@ -3,13 +3,13 @@ import { MAX_SHOWN_DESCRIPTION, TYPE_HEADERS } from "../const.js";
 
 const formatDescription = (description) => {
   if (description.length > MAX_SHOWN_DESCRIPTION) {
-    return `${description.slice(0, (MAX_SHOWN_DESCRIPTION - 1))}...`;
+    return `${description.slice(0, MAX_SHOWN_DESCRIPTION - 1)}...`;
   }
   return description;
 };
 
 const createItemTemplate = (item) => {
-  const {type, previewImage, title, price, description} = item;
+  const { type, previewImage, title, price, description } = item;
 
   return `<li class="catalogue__item">
   <div class="item-card">
@@ -32,18 +32,41 @@ const createItemTemplate = (item) => {
       <h3 class="title title--h4 item-card__title">${title}</h3>
       <div class="item-card__price-wrap"><b class="item-card__formatted-price">${price}</b><span class="item-card__currency">р</span></div>
     </div>
-    <p class="text text--size-20 item-card__desc">${formatDescription(description)}</p>
+    <p class="text text--size-20 item-card__desc">${formatDescription(
+      description
+    )}</p>
   </div>
-  </li>`
+  </li>`;
 };
 
 export default class ItemView extends AbstractView {
   #item = null;
+  #handleItemClick = null;
+  #handleFaveClick = null;
 
-  constructor(item) {
+  constructor(item, onItemClick, onFaveClick) {
     super();
     this.#item = item;
+    this.#handleItemClick = onItemClick;
+    this.#handleFaveClick = onFaveClick;
+
+    this.element
+      .querySelector(".item-card__btn")
+      .addEventListener("click", this.#itemClickHandler);
+    this.element
+      .querySelector(".item-card__to-fav-btn")
+      .addEventListener("click", this.#faveClickHandler);
   }
+
+  #itemClickHandler = () => {
+    this.#handleItemClick();
+    document.querySelector('.modal').classList.add('product-card-active', 'is-active');
+    document.querySelector('body').classList.add('scroll-lock');
+  };
+
+  #faveClickHandler = () => {
+    this.#handleFaveClick();
+  };
 
   get template() {
     return createItemTemplate(this.#item);
