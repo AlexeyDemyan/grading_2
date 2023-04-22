@@ -1,6 +1,6 @@
-import { render } from "../framework/render.js";
+import { render, remove } from "../framework/render.js";
 import ItemView from "../view/item-view.js";
-import { modals } from '../modals/init-modals.js';
+import { modals } from "../modals/init-modals.js";
 import ModalView from "../view/modal-view.js";
 
 export default class ItemPresenter {
@@ -14,6 +14,10 @@ export default class ItemPresenter {
   constructor(itemListContainer, modalContainer) {
     this.#itemListContainer = itemListContainer;
     this.#modalContainer = modalContainer;
+
+    this.#modalContainer
+      .querySelector(".modal-product__btn-close")
+      .addEventListener("click", this.#handleClose);
   }
 
   init(item) {
@@ -28,15 +32,31 @@ export default class ItemPresenter {
   }
 
   #handleItemClick = () => {
-    console.log("main item clicked");
-    document.querySelector('body').classList.add('scroll-lock');
+    document.querySelector("body").classList.add("scroll-lock");
     modals.open("popup-data-attr");
-    console.log('need to populate item data into popup now');
-    this.#modalComponent = new ModalView(this.#item, this.#handleFaveClick);
+    this.#modalComponent = new ModalView(
+      this.#item,
+      this.#handleFaveClick,
+      this.#handleClose
+    );
+    document.addEventListener("keydown", this.#escKeyDownHandler);
     render(this.#modalComponent, this.#modalContainer);
   };
 
   #handleFaveClick = () => {
     console.log("fave button clicked");
+  };
+
+  #handleClose = () => {
+    console.log("closing functionality");
+    remove(this.#modalComponent);
+  };
+
+  #escKeyDownHandler = (evt) => {
+    if (evt.key === "Escape" || evt.key === "Esc") {
+      evt.preventDefault();
+      remove(this.#modalComponent);
+      document.removeEventListener("keydown", this.#escKeyDownHandler);
+    }
   };
 }

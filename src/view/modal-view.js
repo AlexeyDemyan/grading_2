@@ -49,7 +49,7 @@ const createModalTemplate = (item) => {
 </div>
 <div class="product-description">
   <div class="product-description__header">
-    <h3 class="title title--h2">${title}</h3><b class="price price--size-big">5&nbsp;${price}<span>Р</span></b>
+    <h3 class="title title--h2">${title}</h3><b class="price price--size-big">${price}<span>Р</span></b>
   </div>
   <p class="text text--size-40">${description}</p>
   <button class="btn btn--outlined btn--full-width product-description__button" type="button" data-focus>отложить
@@ -60,20 +60,26 @@ const createModalTemplate = (item) => {
 export default class ModalView extends AbstractView {
   #item = null;
   #handleFaveClick = null;
+  #handleClose = null;
 
-  constructor(item, onFaveClick) {
+  constructor(item, onFaveClick, onClose) {
     super();
     this.#item = item;
     this.#handleFaveClick = onFaveClick;
+    this.#handleClose = onClose;
+
+    this.element
+      .querySelector(".product-description__button")
+      .addEventListener("click", this.#handleFaveClick);
 
     // this.element
-    //   .querySelector(".product-description__button")
-    //   .addEventListener("click", this.#faveClickHandler);
-  }
+    //   .querySelector(".modal-product__btn-close")
+    //   .addEventListener("click", this.#handleClose);
 
-  #faveClickHandler = () => {
-    this.#handleFaveClick();
-  };
+    // this.element
+    //   .querySelector(".modal-product__btn-close")
+    //   .addEventListener("click", () => {console.log('clickedon close btn')});
+  }
 
   get template() {
     return createModalTemplate(this.#item);
