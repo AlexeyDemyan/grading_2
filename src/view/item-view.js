@@ -1,6 +1,5 @@
 import AbstractView from "../framework/view/abstract-view.js";
 import { MAX_SHOWN_DESCRIPTION, TYPE_HEADERS } from "../const.js";
-import { modals } from '../modals/init-modals.js'
 
 const formatDescription = (description) => {
   if (description.length > MAX_SHOWN_DESCRIPTION) {
@@ -44,6 +43,7 @@ export default class ItemView extends AbstractView {
   #item = null;
   #handleItemClick = null;
   #handleFaveClick = null;
+  #modalComponent = null;
 
   constructor(item, onItemClick, onFaveClick) {
     super();
@@ -53,23 +53,24 @@ export default class ItemView extends AbstractView {
 
     this.element
       .querySelector(".item-card__btn")
-      .addEventListener("click", this.#itemClickHandler);
+      .addEventListener("click", this.#handleItemClick);
     this.element
       .querySelector(".item-card__to-fav-btn")
-      .addEventListener("click", this.#faveClickHandler);
+      .addEventListener("click", this.#handleFaveClick);
   }
 
-  #itemClickHandler = () => {
-    this.#handleItemClick();
-    // document.querySelector('.modal').classList.add('product-card-active', 'is-active');
-    document.querySelector('body').classList.add('scroll-lock');
-    modals.open("popup-data-attr");
-    console.log('need to populate item data into popup now')
-  };
+  // #itemClickHandler = () => {
+  //   this.#handleItemClick();
+  //   document.querySelector('.modal').classList.add('product-card-active', 'is-active');
+  //   document.querySelector('body').classList.add('scroll-lock');
+  //   modals.open("popup-data-attr");
+  //   console.log('need to populate item data into popup now');
+  //   this.#modalComponent = new ModalView(this.#item, this.#handleFaveClick);
+  // };
 
-  #faveClickHandler = () => {
-    this.#handleFaveClick();
-  };
+  // #faveClickHandler = () => {
+  //   this.#handleFaveClick();
+  // };
 
   get template() {
     return createItemTemplate(this.#item);
