@@ -10,6 +10,7 @@ import { disableAndHideButton } from "../utils/hide-button.js";
 
 export default class ItemListPresenter {
   #itemListContainer = null;
+  #modalContainer = null;
   #itemsModel = null;
   #filtersModel = null;
 
@@ -25,8 +26,9 @@ export default class ItemListPresenter {
   #noItemsMessageComponent = new NoItemsView();
   #catalogueButtonWrapView = null;
 
-  constructor(itemsListContainer, itemsModel, filtersModel) {
+  constructor(itemsListContainer, modalContainer, itemsModel, filtersModel) {
     this.#itemListContainer = itemsListContainer;
+    this.#modalContainer = modalContainer;
     this.#itemsModel = itemsModel;
     this.#filtersModel = filtersModel;
   }
@@ -45,7 +47,7 @@ export default class ItemListPresenter {
   }
 
   #renderItem(item) {
-    const itemPresenter = new ItemPresenter(this.#itemListContainer);
+    const itemPresenter = new ItemPresenter(this.#itemListContainer, this.#modalContainer);
     itemPresenter.init(item);
     this.#itemPresenters.push(itemPresenter);
   }

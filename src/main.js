@@ -7,7 +7,7 @@ import HeaderPresenter from "./presenter/header-presenter";
 import MainPresenter from "./presenter/main-presenter.js";
 import ItemsModel from "./model/items-model";
 import ItemsApiService from "./items-api-service";
-import { ApiCredentials } from './const.js';
+import { ApiCredentials } from "./const.js";
 import ItemListPresenter from "./presenter/item-list-presenter";
 import FiltersModel from "./model/filters-model.js";
 
@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // Ваш код...
 
   const mainElement = document.querySelector("main");
+  const modalElement = document.querySelector(".modal-product");
 
   const itemsModel = new ItemsModel({
     itemsApiService: new ItemsApiService(
@@ -51,18 +52,27 @@ window.addEventListener("DOMContentLoaded", () => {
 
   const tempData = {
     count: 5,
-    amount: 6
-  }
+    amount: 6,
+  };
 
   const filtersModel = new FiltersModel();
 
   const headerPresenter = new HeaderPresenter(mainElement);
-  const mainPresenter = new MainPresenter(mainElement, itemsModel, filtersModel);
-  const itemListPresenter = new ItemListPresenter(mainElement, itemsModel, filtersModel)
+  const mainPresenter = new MainPresenter(
+    mainElement,
+    modalElement,
+    itemsModel,
+    filtersModel
+  );
+  const itemListPresenter = new ItemListPresenter(
+    mainElement,
+    modalElement,
+    itemsModel,
+    filtersModel
+  );
 
   headerPresenter.init(tempData);
   mainPresenter.init();
   itemListPresenter.init();
   itemsModel.init();
-
 });

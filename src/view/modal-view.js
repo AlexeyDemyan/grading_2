@@ -12,7 +12,7 @@ import AbstractView from "../framework/view/abstract-view.js";
 const createModalTemplate = (item) => {
   const { authorPhoto, previewImage, title, price, description } = item;
 
-  return `<div class="image-slider swiper modal-product__slider">
+  return `<div><div class="image-slider swiper modal-product__slider">
   <div class="image-slides-list swiper-wrapper">
     <div class="image-slides-list__item swiper-slide">
       <div class="image-slide">
@@ -54,7 +54,7 @@ const createModalTemplate = (item) => {
   <p class="text text--size-40">${description}</p>
   <button class="btn btn--outlined btn--full-width product-description__button" type="button" data-focus>отложить
   </button>
-</div>`;
+</div></div>`;
 };
 
 export default class ModalView extends AbstractView {

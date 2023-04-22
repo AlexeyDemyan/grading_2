@@ -43,7 +43,6 @@ export default class ItemView extends AbstractView {
   #item = null;
   #handleItemClick = null;
   #handleFaveClick = null;
-  #modalComponent = null;
 
   constructor(item, onItemClick, onFaveClick) {
     super();
@@ -58,19 +57,6 @@ export default class ItemView extends AbstractView {
       .querySelector(".item-card__to-fav-btn")
       .addEventListener("click", this.#handleFaveClick);
   }
-
-  // #itemClickHandler = () => {
-  //   this.#handleItemClick();
-  //   document.querySelector('.modal').classList.add('product-card-active', 'is-active');
-  //   document.querySelector('body').classList.add('scroll-lock');
-  //   modals.open("popup-data-attr");
-  //   console.log('need to populate item data into popup now');
-  //   this.#modalComponent = new ModalView(this.#item, this.#handleFaveClick);
-  // };
-
-  // #faveClickHandler = () => {
-  //   this.#handleFaveClick();
-  // };
 
   get template() {
     return createItemTemplate(this.#item);
