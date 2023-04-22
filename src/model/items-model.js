@@ -5,6 +5,7 @@ export default class ItemsModel extends Observable {
   #itemsApiService = null;
   #items = [];
   #favorites = [];
+  #specificItem = {};
 
   constructor({itemsApiService}) {
     super();
@@ -19,6 +20,10 @@ export default class ItemsModel extends Observable {
     return this.#favorites;
   }
 
+  get specificItem () {
+    return this.#specificItem;
+  }
+
   async init() {
     try {
       this.#items = await this.#itemsApiService.items;
@@ -28,6 +33,18 @@ export default class ItemsModel extends Observable {
       this.#items = [];
     }
     this._notify();
+  }
+
+  async getSpecificItem(itemId) {
+    try {
+      this.#specificItem = await this.#itemsApiService.getSpecificItem(itemId)
+    }
+    catch(err) {
+      console.log(err);
+      this.#specificItem = {};
+    }
+    console.log(this.#specificItem);
+    return this.#specificItem;
   }
 
 }

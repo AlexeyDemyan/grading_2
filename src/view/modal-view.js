@@ -59,26 +59,25 @@ const createModalTemplate = (item) => {
 
 export default class ModalView extends AbstractView {
   #item = null;
+  #specificItem = null;
   #handleFaveClick = null;
   #handleClose = null;
 
-  constructor(item, onFaveClick, onClose) {
+  constructor(item, specifitItem, onFaveClick, onClose) {
     super();
     this.#item = item;
+    this.#specificItem = specifitItem
     this.#handleFaveClick = onFaveClick;
     this.#handleClose = onClose;
 
     this.element
       .querySelector(".product-description__button")
       .addEventListener("click", this.#handleFaveClick);
-
-    // this.element
-    //   .querySelector(".modal-product__btn-close")
-    //   .addEventListener("click", this.#handleClose);
-
-    // this.element
-    //   .querySelector(".modal-product__btn-close")
-    //   .addEventListener("click", () => {console.log('clickedon close btn')});
+    this.element
+      .querySelector(".product-description__button")
+      .addEventListener("click", () => {
+        console.log(this.#specificItem)
+      });
   }
 
   get template() {

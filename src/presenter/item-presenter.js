@@ -8,19 +8,22 @@ export default class ItemPresenter {
   #modalContainer = null;
   #itemComponent = null;
   #modalComponent = null;
+  #itemsModel = null;
+  #specificItem = null;
 
   #item = null;
 
-  constructor(itemListContainer, modalContainer) {
+  constructor(itemListContainer, modalContainer, itemsModel) {
     this.#itemListContainer = itemListContainer;
     this.#modalContainer = modalContainer;
+    this.#itemsModel = itemsModel;
 
     this.#modalContainer
       .querySelector(".modal-product__btn-close")
       .addEventListener("click", this.#handleClose);
   }
 
-  init(item) {
+  async init(item) {
     this.#item = item;
 
     this.#itemComponent = new ItemView(
@@ -29,16 +32,48 @@ export default class ItemPresenter {
       this.#handleFaveClick
     );
     render(this.#itemComponent, this.#itemListContainer);
+
+    this.#specificItem = await this.#itemsModel.getSpecificItem(this.#item.id);
+
+    // const libba = await this.#itemsModel.getSpecificItem(item.id)
+    // console.log(libba);
+    // this.#specificItem = item.id;
+    // await this.#itemsModel.get
+  }
+
+  async getSpecificItem(itemId) {
+    const libba = await this.#itemsModel.getSpecificItem(itemId);
+    console.log(libba);
+    console.log('I guess will be creating photos here then');
+    return libba;
   }
 
   #handleItemClick = () => {
+    // try {
+    //   this.#itemsModel.getSpecificItem(this.#item.id);
+    //   console.log(this.#itemsModel.specificItem);
+    // }
+    // catch(err) {
+    //   console.log(err)
+    // }
+    // console.log(this.#itemsModel.specificItem);
+
+
+    // this.#itemsModel.specificItem = this.#itemsModel.getSpecificItem(this.#item.id);
+    // this.#specificItem = this.#itemsModel.getSpecificItem(this.#item.id);
+    this.#specificItem = this.getSpecificItem(this.#item.id);
+    console.log(this.#specificItem)
+    console.log(this.#itemsModel.specificItem);
+
     document.querySelector("body").classList.add("scroll-lock");
     modals.open("popup-data-attr");
     this.#modalComponent = new ModalView(
       this.#item,
+      this.#specificItem,
       this.#handleFaveClick,
       this.#handleClose
     );
+    console.log(this.#specificItem);
     document.addEventListener("keydown", this.#escKeyDownHandler);
     render(this.#modalComponent, this.#modalContainer);
   };
