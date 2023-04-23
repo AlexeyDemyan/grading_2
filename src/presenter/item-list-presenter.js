@@ -7,12 +7,15 @@ import { FilterReason, FilterColor } from "../const.js";
 import { filterByReason, filterByColor } from "../utils/filter.js";
 import CatalogueButtonWrapView from "../view/catalogue-btn-wrap-view.js";
 import { disableAndHideButton } from "../utils/hide-button.js";
+import { sortPriceDown, sortPriceUp } from "../utils/sort.js";
+import { SortType } from "../const.js";
 
 export default class ItemListPresenter {
   #itemListContainer = null;
   #modalContainer = null;
   #itemsModel = null;
   #filtersModel = null;
+  #chosenSortType = null;
 
   #itemPresenters = [];
   #items = [];
@@ -26,11 +29,18 @@ export default class ItemListPresenter {
   #noItemsMessageComponent = new NoItemsView();
   #catalogueButtonWrapView = null;
 
-  constructor(itemsListContainer, modalContainer, itemsModel, filtersModel) {
+  constructor(
+    itemsListContainer,
+    modalContainer,
+    itemsModel,
+    filtersModel,
+    chosenSortType
+  ) {
     this.#itemListContainer = itemsListContainer;
     this.#modalContainer = modalContainer;
     this.#itemsModel = itemsModel;
     this.#filtersModel = filtersModel;
+    this.#chosenSortType = chosenSortType;
   }
 
   get items() {
@@ -48,6 +58,17 @@ export default class ItemListPresenter {
       this.#filtersModel.filterColor
     );
     console.log(filteredByColorItems);
+    this.#items = filteredByColorItems;
+
+    switch (this.#chosenSortType) {
+      case SortType.PRICE_UP:
+        return filteredByColorItems.sort(sortPriceUp);
+      case SortType.PRICE_DOWN:
+        return filteredByColorItems.sort(sortPriceDown)
+    }
+
+    console.log(filteredByColorItems);
+    this.#items = filteredByColorItems;
 
     return filteredByColorItems;
   }

@@ -10,10 +10,12 @@ import PopupDeferredView from "../view/popup-deferred-view.js";
 import CatalogueContainerView from "../view/catalogue-container-view.js";
 import CatalogueHeaderView from "../view/catalogue-header-view.js";
 import CatalogueListView from "../view/catalogue-list-view.js";
-
 import ItemListPresenter from "./item-list-presenter.js";
+import { SortType } from "../const.js";
 
 export default class MainPresenter {
+  #chosenSortType = SortType.PRICE_UP;
+
   #mainMenuContainer = null;
   #modalContainer = null;
   #itemsModel = null;
@@ -32,7 +34,7 @@ export default class MainPresenter {
 
   constructor(mainMenuContainer, modalContainer, itemsModel, filtersModel) {
     this.#mainMenuContainer = mainMenuContainer;
-    this.#modalContainer = modalContainer
+    this.#modalContainer = modalContainer;
     this.#itemsModel = itemsModel;
     this.#filtersModel = filtersModel;
 
@@ -41,7 +43,13 @@ export default class MainPresenter {
   }
 
   #renderBoard() {
-    const itemListPresenter = new ItemListPresenter(this.#catalogueListView.element, this.#modalContainer , this.#itemsModel, this.#filtersModel);
+    const itemListPresenter = new ItemListPresenter(
+      this.#catalogueListView.element,
+      this.#modalContainer,
+      this.#itemsModel,
+      this.#filtersModel,
+      this.#chosenSortType
+    );
 
     render(this.#heroComponent, this.#mainMenuContainer);
     render(this.#missionComponent, this.#mainMenuContainer);
@@ -60,10 +68,9 @@ export default class MainPresenter {
 
   #handleModelEvent = () => {
     this.init();
-  }
+  };
 
   init() {
     this.#renderBoard();
   }
-
 }

@@ -3,13 +3,6 @@ const ApiCredentials = {
   AUTHORIZATION: "Basic hsie9309fjsidf322",
 };
 
-const UpdateType = {
-  PATCH: "PATCH",
-  MINOR: "MINOR",
-  MAJOR: "MAJOR",
-  INIT: "INIT",
-};
-
 const FilterReason = {
   ALL: "for-all",
   BIRTHDAY: "birthdayboy",
@@ -47,13 +40,25 @@ const TYPE_HEADERS = {
   forlove: "любимой",
 };
 
+const UpdateType = {
+  PATCH: "PATCH",
+  MINOR: "MINOR",
+  MAJOR: "MAJOR",
+  INIT: "INIT",
+};
+
+
 const MAX_SHOWN_DESCRIPTION = 140;
 
 const ITEMS_SHOW_COUNT = 6;
 
+const ErrorMessage = {
+  ADD_ITEM: 'Unable to add item',
+  REMOVE_ITEM: 'Unable to remove item'
+}
+
 export {
   ApiCredentials,
-  UpdateType,
   FilterReason,
   FilterColor,
   SortType,
@@ -61,4 +66,6 @@ export {
   ScrollUp,
   MAX_SHOWN_DESCRIPTION,
   TYPE_HEADERS,
+  ErrorMessage,
+  UpdateType,
 };
