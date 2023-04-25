@@ -23,7 +23,6 @@ export default class ItemListPresenter {
   #renderedItemCount = ITEMS_SHOW_COUNT;
   #filterReason = FilterReason.ALL;
   #filterColor = FilterColor.ALL;
-  #isLoading = true;
 
   #itemsListComponent = new CatalogueListView();
   #noItemsMessageComponent = new NoItemsView();
@@ -47,17 +46,14 @@ export default class ItemListPresenter {
     this.#filterReason = this.#filtersModel.filterReason;
     this.#filterColor = this.#filtersModel.filterColor;
     const items = this.#itemsModel.items;
-    console.log(items);
     const filteredByReasonItems = filterByReason(
       items,
       this.#filtersModel.filterReason
     );
-    console.log(items);
     const filteredByColorItems = filterByColor(
       filteredByReasonItems,
       this.#filtersModel.filterColor
     );
-    console.log(filteredByColorItems);
     this.#items = filteredByColorItems;
 
     switch (this.#chosenSortType) {
@@ -66,8 +62,6 @@ export default class ItemListPresenter {
       case SortType.PRICE_DOWN:
         return filteredByColorItems.sort(sortPriceDown)
     }
-
-    console.log(filteredByColorItems);
     this.#items = filteredByColorItems;
 
     return filteredByColorItems;
@@ -81,8 +75,6 @@ export default class ItemListPresenter {
     );
     itemPresenter.init(item);
     this.#itemPresenters.push(itemPresenter);
-    // const libba = itemPresenter.getSpecificItem(item.id, this.#itemsModel);
-    // console.log(libba);
   }
 
   #renderItems(items) {
@@ -110,8 +102,6 @@ export default class ItemListPresenter {
       this.#renderItems(
         this.items.slice(0, Math.min(ITEMS_SHOW_COUNT, this.#renderedItemCount))
       );
-      // this.#renderItems(this.items);
-      // console.log(this.items);
       this.#renderLoadMoreButton();
 
       if (this.#renderedItemCount >= this.items.length) {
@@ -135,8 +125,6 @@ export default class ItemListPresenter {
     );
     this.#renderItems(items);
     this.#renderedItemCount = newRenderedItemsCount;
-    console.log(this.#renderedItemCount);
-
     if (this.#renderedItemCount >= this.items.length) {
       disableAndHideButton(loadMoreButtonElement);
     }

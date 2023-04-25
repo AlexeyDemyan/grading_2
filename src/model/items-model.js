@@ -24,7 +24,6 @@ export default class ItemsModel extends Observable {
     try {
       this.#items = await this.#itemsApiService.items;
     } catch (err) {
-      console.log(err);
       this.#items = [];
     }
     this._notify(UpdateType.INIT);
@@ -34,10 +33,8 @@ export default class ItemsModel extends Observable {
     try {
       this.#specificItem = await this.#itemsApiService.getSpecificItem(itemId);
     } catch (err) {
-      console.log(err);
       this.#specificItem = {};
     }
-    console.log(this.#specificItem);
     return this.#specificItem;
   }
 

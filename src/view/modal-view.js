@@ -1,13 +1,4 @@
 import AbstractView from "../framework/view/abstract-view.js";
-// import { MAX_SHOWN_DESCRIPTION, TYPE_HEADERS } from "../const.js";
-// import { modals } from '../modals/init-modals.js'
-
-// const formatDescription = (description) => {
-//   if (description.length > MAX_SHOWN_DESCRIPTION) {
-//     return `${description.slice(0, MAX_SHOWN_DESCRIPTION - 1)}...`;
-//   }
-//   return description;
-// };
 
 const createModalTemplate = (item) => {
   const { authorPhoto, previewImage, title, price, description } = item;
@@ -76,7 +67,7 @@ export default class ModalView extends AbstractView {
     this.element
       .querySelector(".product-description__button")
       .addEventListener("click", () => {
-        console.log(this.#specificItem)
+
       });
   }
 
